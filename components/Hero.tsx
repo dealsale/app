@@ -116,7 +116,7 @@ export function Hero({ whatsappNumber }: { whatsappNumber: string }) {
             className="animate-float"
           >
             <div className="absolute -inset-10 rounded-full bg-marea-500/30 blur-3xl" />
-            <LogoMark className="relative h-72 w-72 drop-shadow-[0_0_40px_rgba(139,92,246,0.5)]" />
+            <LogoMark className="relative h-72 w-72 object-contain drop-shadow-[0_0_40px_rgba(139,92,246,0.5)]" />
           </motion.div>
         </motion.div>
       </div>
