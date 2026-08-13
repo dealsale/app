@@ -19,16 +19,22 @@ Landing page bilingüe (ES/EN) + sistema de reservas + panel de administración 
 
 ## 🛠️ Stack
 
-Next.js 14 (App Router) · TypeScript · Tailwind CSS · Framer Motion · Prisma + SQLite · Zod
+Next.js 14 (App Router) · TypeScript · Tailwind CSS · Framer Motion · Prisma + PostgreSQL · Zod
+
+> 🚂 **¿Desplegar en vivo?** Sigue [`DEPLOY.md`](./DEPLOY.md) para publicar en Railway con base de datos y panel de admin.
 
 ## 🚀 Puesta en marcha
 
 ```bash
 npm install            # instala y genera el cliente de Prisma
-npx prisma migrate dev # crea la base de datos
-npm run db:seed        # carga los tours de ejemplo
-npm run dev            # http://localhost:3000
+# Configura DATABASE_URL (PostgreSQL) en .env — ver .env.example
+npx prisma migrate deploy   # crea las tablas
+npm run db:seed             # carga los tours de ejemplo
+npm run dev                 # http://localhost:3000
 ```
+
+> Necesitas una base PostgreSQL. Para desarrollo local puedes usar la de Railway
+> (copia su `DATABASE_URL`) o un Postgres local.
 
 Producción:
 
@@ -43,7 +49,7 @@ Copia `.env.example` a `.env` y ajusta:
 
 | Variable | Descripción |
 |---|---|
-| `DATABASE_URL` | Conexión a la base de datos (SQLite por defecto). |
+| `DATABASE_URL` | Conexión a PostgreSQL (Railway la inyecta automáticamente). |
 | `ADMIN_PASSWORD` | Contraseña del panel `/admin`. |
 | `SESSION_SECRET` | Secreto para firmar la sesión de admin (cámbialo en producción). |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Número de WhatsApp con código de país, solo dígitos (ej. `573001234567`). |
