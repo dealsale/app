@@ -43,10 +43,32 @@ En el servicio de la app, pestaña **Variables**, agrega:
 
 ---
 
+## 6. Conecta tu dominio: `mareatours.site`
+
+1. En el servicio de la app: **Settings → Networking → Custom Domain**.
+2. Agrega **`mareatours.site`** y también **`www.mareatours.site`**.
+3. Railway te mostrará a qué apuntar. En tu proveedor del dominio (donde compraste
+   `mareatours.site`), crea estos registros DNS:
+
+   | Tipo | Nombre / Host | Valor / Destino |
+   |---|---|---|
+   | `CNAME` | `www` | el destino que te da Railway (algo como `xxxx.up.railway.app`) |
+   | `CNAME` o `ALIAS`/`ANAME` | `@` (raíz) | el mismo destino de Railway |
+
+   > Muchos proveedores no permiten `CNAME` en la raíz (`@`). Si es tu caso, usa
+   > un registro **ALIAS/ANAME** apuntando a Railway, **o** configura el dominio raíz
+   > para que **redirija a `www.mareatours.site`**. Cloudflare, Namecheap y GoDaddy
+   > lo soportan de formas ligeramente distintas — si me dices dónde compraste el
+   > dominio, te doy los valores exactos.
+
+4. Espera a que propague el DNS (unos minutos a un par de horas). Railway emite el
+   **certificado HTTPS** automáticamente. ¡Listo: tu sitio en `https://mareatours.site`!
+
+---
+
 ### Notas
 
 - El seed usa `upsert`, así que puedes reiniciar sin duplicar tours. Edita todo desde
   el panel de admin o en `prisma/seed.mjs`.
-- Para un dominio propio: **Settings → Networking → Custom Domain** y apunta el CNAME.
 - ¿Prefieres otra plataforma? Cualquier host de Node/Next.js con Postgres sirve
   (Render, Fly.io, VPS). Solo necesita las mismas 4 variables de entorno.
